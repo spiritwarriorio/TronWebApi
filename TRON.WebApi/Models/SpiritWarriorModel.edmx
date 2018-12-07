@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DBSWModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CUE_Cuentas">
+          <Key>
+            <PropertyRef Name="CUE_Id" />
+          </Key>
+          <Property Name="CUE_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CUE_NickName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CUE_ClavePublica" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="CUE_Puntos" Type="int" Nullable="false" />
+          <Property Name="CUE_FechaRegistro" Type="datetime" Nullable="false" />
+          <Property Name="CUE_FechaUltimaActualizacion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Function Name="CrearCuenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nickname" Type="nvarchar" Mode="In" />
+          <Parameter Name="address" Type="nvarchar" Mode="In" />
+          <Parameter Name="puntos" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ListarClasificacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ValorMaximoRegistros" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="DBSWModelStoreContainer">
+          <EntitySet Name="CUE_Cuentas" EntityType="Self.CUE_Cuentas" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBSWModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CUE_Cuentas">
+          <Key>
+            <PropertyRef Name="CUE_Id" />
+          </Key>
+          <Property Name="CUE_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CUE_NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CUE_ClavePublica" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CUE_Puntos" Type="Int32" Nullable="false" />
+          <Property Name="CUE_FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CUE_FechaUltimaActualizacion" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="DBSWEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CUE_Cuentas" EntityType="Self.CUE_Cuentas" />
+          <FunctionImport Name="CrearCuenta">
+            <Parameter Name="nickname" Mode="In" Type="String" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="puntos" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarClasificacion" ReturnType="Collection(DBSWModel.ListarClasificacion_Result)">
+            <Parameter Name="ValorMaximoRegistros" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="ListarClasificacion_Result">
+          <Property Type="Int32" Name="CUE_Id" Nullable="false" />
+          <Property Type="String" Name="CUE_NickName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CUE_ClavePublica" Nullable="false" MaxLength="256" />
+          <Property Type="Int32" Name="CUE_Puntos" Nullable="false" />
+          <Property Type="DateTime" Name="CUE_FechaRegistro" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="CUE_FechaUltimaActualizacion" Nullable="false" Precision="23" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBSWModelStoreContainer" CdmEntityContainer="DBSWEntities">
+          <EntitySetMapping Name="CUE_Cuentas">
+            <EntityTypeMapping TypeName="DBSWModel.CUE_Cuentas">
+              <MappingFragment StoreEntitySet="CUE_Cuentas">
+                <ScalarProperty Name="CUE_Id" ColumnName="CUE_Id" />
+                <ScalarProperty Name="CUE_NickName" ColumnName="CUE_NickName" />
+                <ScalarProperty Name="CUE_ClavePublica" ColumnName="CUE_ClavePublica" />
+                <ScalarProperty Name="CUE_Puntos" ColumnName="CUE_Puntos" />
+                <ScalarProperty Name="CUE_FechaRegistro" ColumnName="CUE_FechaRegistro" />
+                <ScalarProperty Name="CUE_FechaUltimaActualizacion" ColumnName="CUE_FechaUltimaActualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CrearCuenta" FunctionName="DBSWModel.Store.CrearCuenta" />
+          <FunctionImportMapping FunctionImportName="ListarClasificacion" FunctionName="DBSWModel.Store.ListarClasificacion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBSWModel.ListarClasificacion_Result">
+                <ScalarProperty Name="CUE_Id" ColumnName="CUE_Id" />
+                <ScalarProperty Name="CUE_NickName" ColumnName="CUE_NickName" />
+                <ScalarProperty Name="CUE_ClavePublica" ColumnName="CUE_ClavePublica" />
+                <ScalarProperty Name="CUE_Puntos" ColumnName="CUE_Puntos" />
+                <ScalarProperty Name="CUE_FechaRegistro" ColumnName="CUE_FechaRegistro" />
+                <ScalarProperty Name="CUE_FechaUltimaActualizacion" ColumnName="CUE_FechaUltimaActualizacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
