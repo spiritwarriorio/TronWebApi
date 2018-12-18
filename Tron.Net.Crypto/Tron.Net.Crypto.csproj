@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Portable.BouncyCastle" Version="1.8.2" />
+    <PackageReference Include="SHA3.Net" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tron.Net.Common\Tron.Net.Common.csproj" />
+  </ItemGroup>
+
+</Project>

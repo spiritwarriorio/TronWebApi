@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using TRON.WebApi.Common;
 using TRON.WebApi.Models;
-using TRON.WebApi.Services;
+using TRON.WebApi.Services.Service;
 
 
 namespace TRON.WebApi.Controllers
@@ -24,6 +24,13 @@ namespace TRON.WebApi.Controllers
         public Cuenta GetAccount(string address)
         {
             return cuentaRepository.getaccount(address);
+        }
+
+        [Route("api/v1/Cuenta/GetAccountPrivate")]
+        [HttpGet]
+        public Cuenta GetAccountPrivate(string privateKey)
+        {
+            return cuentaRepository.getaccountprivate(privateKey);
         }
 
         [Route("api/v1/Cuenta/SaveAccount/{token}")]

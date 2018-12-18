@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using Tron.Net.Crypto;
 using TRON.WebApi.Common;
 using TRON.WebApi.Models;
 
-namespace TRON.WebApi.Services
+namespace TRON.WebApi.Services.Service
 {
     public class CuentaRepository
     {
@@ -94,6 +95,25 @@ namespace TRON.WebApi.Services
                 }
             }
             return cuenta;
+        }
+
+        public Cuenta getaccountprivate(string privateKey)
+        {
+
+            ECKey eCkey;
+            eCkey = ECKey.FromPrivateHexString(privateKey);
+            WalletAddress addressWallet = WalletAddress.MainNetWalletAddress(eCkey);
+
+            string address = addressWallet.ToString();
+
+            byte[] addressHex = Base58CheckEncoding.Decode(address);
+            address = BitConverter.ToString(addressHex);
+            address = address.Replace("-", "");
+
+            string URL = Constantes.defaultNodes.solidityNode + "/walletsolidity/getaccount";
+            var retorno = new HelperConsumoRest().PeticionRespuestaObj<Cuenta>(URL, "?address=" + address);
+
+            return retorno;
         }
     }
 }
