@@ -9,18 +9,20 @@ namespace TRON.WebApi.Services.Service
 {
     public class CuentaRepository
     {
-        public Cuenta getaccount(string address)
-        {     
+        public CuentaRespuesta getaccount(string privateKey)
+        {
+            string address = Extension.privKey2PubKey(privateKey);
             byte[] addressHex = Base58CheckEncoding.Decode(address);
             address = BitConverter.ToString(addressHex);
             address = address.Replace("-", "");
 
             string URL = Constantes.defaultNodes.solidityNode + "/walletsolidity/getaccount";
-            var retorno = new HelperConsumoRest().PeticionRespuestaObj<Cuenta>(URL, "?address=" + address);
+            var retorno = new HelperConsumoRest().PeticionRespuestaObj<CuentaRespuesta>(URL, "?address=" + address);
 
             return retorno;
         }
 
+       
         public bool saveaccount(CUE_Cuentas value)
         {
             if (!string.IsNullOrEmpty(value.CUE_NickName) && !string.IsNullOrEmpty(value.CUE_ClavePublica))
@@ -95,19 +97,6 @@ namespace TRON.WebApi.Services.Service
             return cuenta;
         }
 
-        public Cuenta getaccountprivate(string privateKey)
-        {
-
-            string address = Extension.privKey2PubKey(privateKey);
-
-            byte[] addressHex = Base58CheckEncoding.Decode(address);
-            address = BitConverter.ToString(addressHex);
-            address = address.Replace("-", "");
-
-            string URL = Constantes.defaultNodes.solidityNode + "/walletsolidity/getaccount";
-            var retorno = new HelperConsumoRest().PeticionRespuestaObj<Cuenta>(URL, "?address=" + address);
-
-            return retorno;
-        }
+       
     }
 }

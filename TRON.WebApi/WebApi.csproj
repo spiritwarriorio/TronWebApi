@@ -336,6 +336,7 @@
     <Compile Include="Grpc\WalletExtensionClientFactory.cs" />
     <Compile Include="Grpc\WalletSolidityClientFactory.cs" />
     <Compile Include="Models\Cuenta.cs" />
+    <Compile Include="Models\CuentaRespuesta.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

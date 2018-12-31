@@ -19,18 +19,11 @@ namespace TRON.WebApi.Controllers
             this.cuentaRepository = new CuentaRepository();
         }
 
-        [Route("api/v1/Cuenta/GetAccount")]
-        [HttpGet]
-        public Cuenta GetAccount(string address)
+        [Route("api/v1/Cuenta/GetAccount/{token}")]
+        [HttpPost]
+        public CuentaRespuesta GetAccount([FromBody]Cuenta cuenta)
         {
-            return cuentaRepository.getaccount(address);
-        }
-
-        [Route("api/v1/Cuenta/GetAccountPrivate")]
-        [HttpGet]
-        public Cuenta GetAccountPrivate(string privateKey)
-        {
-            return cuentaRepository.getaccountprivate(privateKey);
+            return cuentaRepository.getaccount(cuenta.privateKey);
         }
 
         [Route("api/v1/Cuenta/SaveAccount/{token}")]
