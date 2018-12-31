@@ -98,12 +98,6 @@ namespace TRON.WebApi.Services.Service
         public Cuenta getaccountprivate(string privateKey)
         {
 
-            //ECKey eCkey;
-            //eCkey = ECKey.FromPrivateHexString(privateKey);
-            //WalletAddress addressWallet = WalletAddress.MainNetWalletAddress(eCkey);
-
-            //string address = addressWallet.ToString();
-
             string address = Extension.privKey2PubKey(privateKey);
 
             byte[] addressHex = Base58CheckEncoding.Decode(address);
