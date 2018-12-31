@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Web;
 using Tron.Net.Crypto;
 using TRON.WebApi.Common;
 using TRON.WebApi.Models;
@@ -100,11 +98,13 @@ namespace TRON.WebApi.Services.Service
         public Cuenta getaccountprivate(string privateKey)
         {
 
-            ECKey eCkey;
-            eCkey = ECKey.FromPrivateHexString(privateKey);
-            WalletAddress addressWallet = WalletAddress.MainNetWalletAddress(eCkey);
+            //ECKey eCkey;
+            //eCkey = ECKey.FromPrivateHexString(privateKey);
+            //WalletAddress addressWallet = WalletAddress.MainNetWalletAddress(eCkey);
 
-            string address = addressWallet.ToString();
+            //string address = addressWallet.ToString();
+
+            string address = Extension.privKey2PubKey(privateKey);
 
             byte[] addressHex = Base58CheckEncoding.Decode(address);
             address = BitConverter.ToString(addressHex);

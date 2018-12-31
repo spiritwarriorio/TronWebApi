@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.Crypto.Digests;
 using SHA3.Net;
 using Tron.Net.Common;
 using Tron.Net.Crypto;
@@ -70,8 +72,9 @@ namespace TRON.WebApi.Services.Service
 
         public override string ToString()
         {
-            var sha3Hash = Sha3.Sha3256().ComputeHash(Value);
-            var sha3HashBytes = new byte[20];
+            var sha3Hash = CalculateHash(Value);
+            var sha3HashBytes = new byte[20];            
+            
             Array.Copy(sha3Hash, sha3Hash.Length - 20, sha3HashBytes, 0, 20);
             var address = _addressPrefix + sha3HashBytes.ToHexString();
             var hexToByteArray = address.FromHexToByteArray();
@@ -89,5 +92,14 @@ namespace TRON.WebApi.Services.Service
         public bool IsTestNet => _addressPrefix == AddPreFixByteTestnet;
 
         public bool IsMainNet => _addressPrefix == AddPreFixByteMainnet;
+
+        public byte[] CalculateHash(byte[] value)
+        {
+            var digest = new Sha3Digest(256);
+            var output = new byte[digest.GetDigestSize()];
+            digest.BlockUpdate(value, 0, value.Length);
+            digest.DoFinal(output, 0);
+            return output;
+        }
     }
 }
