@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using TRON.WebApi.Common;
-using TRON.WebApi.Models;
-using TRON.WebApi.Services.Service;
-
-
+﻿
 namespace TRON.WebApi.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net;
+    using System.Net.Http;
+    using System.Web.Http;
+    using TRON.WebApi.Common;
+    using TRON.WebApi.Models;
+    using TRON.WebApi.Services.Service;
+
     public class CuentaController : ApiController
     {
         private CuentaRepository cuentaRepository;
