@@ -56,9 +56,9 @@ namespace TRON.WebApi.Services.Service
             if (address != null)
             {
                 AssetContract transfer = new AssetContract();
-                transfer.owner_address = address;
-                transfer.to_address = addressTo;
-                transfer.asset_name = token;
+                transfer.owner_address = address; // TNjfeULTYArKhwtVRvgnzxrDdDABGPdqh6  CLAVE PUBLICA DE DIEGO
+                transfer.to_address = addressTo; //TKm3HuiZ3EiFnRc1idkUyuMgKG86t3SVXk CLAVE PUBLICA DE SPIRIT WARRIOR
+                transfer.asset_name = token; //SpiritWarrior
                 transfer.amount = 1;
 
                 string URL = Constantes.defaultNodes.solidityNode + "/wallet/transferasset";
@@ -88,7 +88,7 @@ namespace TRON.WebApi.Services.Service
 
                         string URLBroadcast = Constantes.defaultNodes.solidityNode + "/wallet/broadcasttransaction";
                         var broadcastRetorno = new HelperConsumoRest().PeticionRespuesta<SignatureResponse, Signature>(broadcast, URLBroadcast);
-
+                        // broadcastRetorno retorna un TRUE o FALSE
                         if (broadcastRetorno != null)
                         {
                             return broadcastRetorno.result;
